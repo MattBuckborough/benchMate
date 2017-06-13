@@ -1,0 +1,1 @@
+var app = angular.module('sampleApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'PlayersCtrl', 'PlayersService', 'GeekCtrl', 'GeekService']);
