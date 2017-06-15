@@ -1,30 +1,23 @@
-angular.module('PlayersService', []).factory('Players', ['$http', function($http) {
+var PlayersFactory = function ($http) {
 
-	return {
+  var factory = {};
 
-    //call to get all players
-    get : function() {
-      return $http.get('/api/players').then(
-        function (response) {
-          console.log(response);
-          return response
-        },
-        function (error) {
-          console.log("ERROR GETTING PLAYERS" + error)
-          console.log(error)
-        });
-    },
+  factory.getPlayers = function () {
+    return $http.get('/api/players');
+  };
 
-    // this call creates a new player
-    create : function(playerData) {
-      return $http.post('/api/players', playerData);
-    },
+  // this call creates a new player
+  factory.create = function (playerData) {
+    return $http.post('/api/players', playerData);
+  };
 
-    // this call deletes a player by id
-    delete : function(playerId) {
-      return $http.delete('/api/players/' + id)
-    }
-
+  // this call deletes a player by id
+  factory.delete = function (playerId) {
+    return $http.delete('/api/players/' + id)
   }
 
-}]);
+  return factory;
+
+};
+
+angular.module('PlayersService', []).factory('PlayersFactory', PlayersFactory);

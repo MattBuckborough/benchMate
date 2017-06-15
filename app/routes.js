@@ -1,23 +1,17 @@
+var players = require('./models/Players')
+
 module.exports = function(app) {
 
 	// server routes ===========================================================
 	// handle things like api calls
 	// authentication routes
 	app.get("/api/players", function(req,res) {
-		require("./models/Players.js").get(function(err, doc) {
-			/*if (err){
-				console.log("FAILED TO GET PLAYERS");
-				res.sendStatus(500);
+		res.send(players.getPlayers(function(err) {
+			if (err) {
+				return err;
 			}
-			else {
-				console.log(doc)
-				res.sendStatus(200).json(doc)
-			}
-		})*/
-			res.json([{name:"Bill"}])
-		});
+		}));
 	});
-
 
 	// frontend routes =========================================================
 	// route to handle all angular requests
@@ -25,4 +19,4 @@ module.exports = function(app) {
 		res.sendfile('./public/index.html');
 	});
 
-};
+}
