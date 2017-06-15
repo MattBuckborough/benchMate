@@ -1,13 +1,7 @@
-angular.module('PlayersCtrl', []).controller('PlayersController', function($scope, Players) {
+angular.module('PlayersCtrl', []).controller('PlayersController',function($scope, $route) {
 
-	$scope.tagline = 'Players';
+	$scope.tagline = 'Players';	
+	$scope.players = [];
+	if ($route.current) $scope.players = $route.current.locals.players.data;
 
-	//Get Players
-	Players.get().then(function (data){
-		$scope.players = data.data;
-		console.log($scope.players)
-
-
-
-	})
 });

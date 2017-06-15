@@ -1,31 +1,34 @@
 // grab the mongoose module
 var mongoose = require('mongoose');
-exports.get = function() { 
-	/*db.get().collection("players").find({}, function (err, outdoc) {
-		if (err) {
-			return cb(err)
-		} else {
-			cb(null, outdoc);
-			
-		}
-	})*/
-	return [{name:"Billl"}]
-}/*
-	mongoose.connection.on('error', function (err) {
-		console.log("Connected")
-	});
-	console.log("tick");
+var Schema = mongoose.Schema;
+// create a Schema
+var playerSchema = new Schema({
+	name : {type : String, index : true},
+	position : String,
+	number : Number
+});
+
+// create a model
+var Player = mongoose.model('Player', playerSchema);
+Player.create(function (err){
+	if (err) throw err;
+})
+
+exports.getPlayers = function() { 
+	console.log("Tick")
+	Player.find({}, function(err,users) {
+		console.log("Tock")
+		if (err) throw err;
+	})
+
+	var testPlayers = [{
+			name: "Jon",
+			position: "Defence",
+			number: 32
+		},{
+			name: "Wayne",
+			position: "Goalie",
+			number: 1
+		}]
+	return testPlayers;
 }
-
-mongoose.connect(db.url);
-
-var db = mongoose.connection;
-console.log("tick")
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-
-	// define our nerd model
-	// module.exports allows us to pass this to other files when it is called
-	
-
-})*/
