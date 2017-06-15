@@ -4,11 +4,9 @@
 This is a web application written using the [MEAN](https://en.wikipedia.org/wiki/MEAN_(software_bundle)) stack. 
 ## Setup
 ### Requirements
-* Have mongod and npm installed
-```
-sudo apt-get install npm
-```
-[Mongo DB Install](https://docs.mongodb.com/manual/administration/install-on-linux/)
+* Have Mongo DB and Node.js installed
+  * [Node.js Install](https://nodejs.org/en/)
+  * [Mongo DB Install](https://docs.mongodb.com/manual/administration/install-on-linux/)
 ### Install
 ```
 git clone https://github.com/MattBuckborough/benchMate.git
