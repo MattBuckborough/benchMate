@@ -18,6 +18,9 @@ bower install
 ```
 # TODO: Make this simply "mongod"
 sudo mongod --smallfiles
+```
+In a new terminal window
+```
 cd /path/to/benchMate
 node app
 ```
