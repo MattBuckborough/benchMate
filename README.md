@@ -1,4 +1,3 @@
-[![Stories in Ready](https://badge.waffle.io/MattBuckborough/benchMate.png?label=ready&title=Ready)](https://waffle.io/MattBuckborough/benchMate?utm_source=badge)
 # benchMate V0.0.1
 ### <p>Last Updated: Jun 15 2017</p> Email:  mattbuckborough@gmail.com
 ## General Usage Notes
@@ -45,3 +44,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## In Progress
+
+[![Stories in Ready](https://badge.waffle.io/MattBuckborough/benchMate.png?label=ready&title=Ready)](https://waffle.io/MattBuckborough/benchMate?utm_source=badge)
