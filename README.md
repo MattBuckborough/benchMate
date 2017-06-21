@@ -4,6 +4,12 @@
 This is a web application written using the [MEAN](https://en.wikipedia.org/wiki/MEAN_(software_bundle)) stack. 
 ## Setup
 ### Requirements
+* [Raspberry Pi 2](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
+* [MFRC 522 RFID Reader](https://www.newegg.ca/Product/Product.aspx?Item=9SIA8Y63G23487)
+* MFRC 522 RFID Tags x N
+* Jumper Cables
+* USB Raspberry Pi Webcam
+* Have [Raspian](https://www.raspberrypi.org/downloads/raspbian/) OS Running on Pi
 * Have Mongo DB and Node.js installed
   * [Node.js Install](https://nodejs.org/en/)
   * [Mongo DB Install](https://docs.mongodb.com/manual/administration/install-on-linux/)
@@ -44,3 +50,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## In Progress		
+	
+[![Stories in Ready](https://badge.waffle.io/MattBuckborough/benchMate.png?label=ready&title=Ready)](https://waffle.io/MattBuckborough/benchMate?utm_source=badge)
