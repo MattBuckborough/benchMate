@@ -13,7 +13,6 @@ app.config(function($routeProvider, $locationProvider) {
 		.when('/players', {
 			templateUrl: 'views/players.html',
 			controller: 'PlayersController',
-			conrollerAs: 'playerVm',
 			resolve: {
 				players : function (PlayersFactory) {
 					return PlayersFactory.getPlayers();
@@ -29,4 +28,3 @@ app.config(function($routeProvider, $locationProvider) {
 	$locationProvider.html5Mode(true);
 
 });
-
