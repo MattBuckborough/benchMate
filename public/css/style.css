@@ -1,3 +1,76 @@
 .navigation-bar :hover {
   background-color:#aaaaaa
 }
+
+.main-widget {
+  background-color:#ccc;
+  padding:20px;
+  border-radius:0 !important;
+}
+
+.table-head {
+  background-color: #000000;
+  color: #e0e0e0;
+}
+
+.table-radius {
+  border-collapse: separate;
+  border:solid 3px;
+  border-top-right-radius:10px;
+  border-top-left-radius:10px;
+}
+
+table th {
+  text-align: center;
+}
+
+.green {
+  color: #229922
+}
+
+.modal-outer {
+  position: absolute; 
+  margin-left:12.5%; 
+  top:10%; 
+  width:50%;
+  height:67%;
+  max-height:700px;
+  background:#555; 
+  z-index:1; 
+  border:solid 0px; 
+  border-radius:20px
+}
+
+.modal-inner {
+  margin:2%; 
+  width:96%; 
+  height:95%;
+  background:#e0e0e0; 
+  border:solid 0px; 
+  border-radius:20px
+}
+
+.modal-header {
+  background:#808080;
+  border:inherit;
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
+  font-size: 18pt;
+  text-align: left;
+  border-bottom: solid 1px #333
+
+}
+
+.modal-body {
+  
+}
+
+.modal-footer {
+  width:80%;
+  margin-right:10%;
+  position:absolute;
+  bottom:10px;
+  right:0;
+  border-top: solid 1px #808080
+
+}
