@@ -2,8 +2,10 @@ var PlayersFactory = function ($http) {
 
   var factory = {};
 
+  // this gets all the players
   factory.getPlayers = function () {
-    return $http.get('/api/players');
+    data = $http.get('/api/players');
+    return data;
   };
 
   // this call creates a new player

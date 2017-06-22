@@ -1,11 +1,14 @@
 {
-  "name": "appname",
-  "main": "server.js",
-  "version": "0.0.9",
+  "name": "benchmate",
+  "main": "app.js",
+  "version": "0.0.1",
+  "license": "MIT",
   "dependencies": {
-    "express": "^4.15.3",
-    "mongoose": "^4.10.4",
+    "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
-    "method-override": "^2.3.9"
+    "express": "^4.15.3",
+    "method-override": "^2.3.9",
+    "mongodb": "^2.2.29",
+    "mongoose": "^4.10.4"
   }
 }

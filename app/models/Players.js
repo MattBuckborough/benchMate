@@ -14,21 +14,9 @@ Player.create(function (err){
 	if (err) throw err;
 })
 
-exports.getPlayers = function() { 
-	console.log("Tick")
+exports.getPlayers = function(cb) { 
 	Player.find({}, function(err,users) {
-		console.log("Tock")
-		if (err) throw err;
+		if (err) return cb(err);
+		cb(null,users);
 	})
-
-	var testPlayers = [{
-			name: "Jon",
-			position: "Defence",
-			number: 32
-		},{
-			name: "Wayne",
-			position: "Goalie",
-			number: 1
-		}]
-	return testPlayers;
 }
