@@ -5,7 +5,7 @@ app.config(function($routeProvider, $locationProvider) {
   $routeProvider
 
 		// home page
-		.when('/', {
+		.when('/dashboard', {
 			templateUrl: 'views/home.html',
 			controller: 'MainController'
 		})

@@ -17,8 +17,6 @@ Player.create(function (err){
 })
 
 
-
-
 exports.getPlayers = function(cb) { 
 	Player.find({deleted: {$exists: false}}, function(err,users) {
 		if (err) return cb(err);
@@ -32,7 +30,6 @@ exports.addPlayer = function(name, pos, num){
 }
 
 exports.deletePlayer = function(id){
-	console.log("Tick")
 	Player.update({_id: id}, {deleted: true}, function(err,users) {
 		if (err) return err;
 	})

@@ -1,5 +1,5 @@
-var players = require('./models/Players')
-var path = require('path')
+var players = require('./models/Players');
+var path = require('path');
 
 module.exports = function(app) {
 
@@ -39,7 +39,11 @@ module.exports = function(app) {
 	// frontend routes =========================================================
 	// route to handle all angular requests
 	app.get('*', function(req, res) {
-		res.sendFile(path.resolve(__dirname + '/../public/index.html'));
+		if (req.session.email) {
+			res.sendFile(path.resolve(__dirname + '/../public/index.html'));
+		} else {
+			res.render('login')
+		}
 	});
 	
 }
