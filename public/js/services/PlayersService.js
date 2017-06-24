@@ -4,18 +4,24 @@ var PlayersFactory = function ($http) {
 
   // this gets all the players
   factory.getPlayers = function () {
-    data = $http.get('/api/players');
+    data = $http.get('/api/players/getPlayers');
     return data;
   };
 
   // this call creates a new player
-  factory.create = function (playerData) {
-    return $http.post('/api/players', playerData);
+  factory.addPlayer = function (playerData) {
+    return $http.put('/api/players/addPlayer', playerData).then(
+      function() {},
+      function() {}
+    );
   };
 
   // this call deletes a player by id
-  factory.delete = function (playerId) {
-    return $http.delete('/api/players/' + id)
+  factory.deletePlayer = function (playerId) {
+    return $http.post('/api/players/deletePlayer/' + playerId).then(
+      function() { },
+      function() { }
+    )
   }
 
   return factory;
