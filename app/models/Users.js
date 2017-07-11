@@ -13,12 +13,18 @@ User.create(function (err){
 	if (err) throw err;
 })
 
-exports.authenticate = function (user,cb) {
+exports.authenticate = function (cb) {
     var status = false;
     User.find({}, function(err,users) {
 		if (err) return cb(err);
-        //console.log(users)
         cb(null,users);
 	})
 
+}
+
+exports.getActiveUser = function(email, cb) {
+    User.find({'email' : email}, {hash:0, _id:0}, function(err,user) {
+		if (err) return cb(err);
+        cb(null,user[0]);
+	})
 }

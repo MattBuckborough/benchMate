@@ -7,7 +7,12 @@ app.config(function($routeProvider, $locationProvider) {
 		// home page
 		.when('/dashboard', {
 			templateUrl: 'views/home.html',
-			controller: 'MainController'
+			controller: 'MainController',
+			resolve: {
+				user : function (PlayersFactory) {
+					return PlayersFactory.getActiveUser();
+				}
+			}
 		})
 
 		.when('/players', {

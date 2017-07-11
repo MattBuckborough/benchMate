@@ -118,3 +118,12 @@ table th {
   border-top: solid 1px #808080
 
 }
+
+.card-margin {
+  margin:5px
+}
+
+.card {
+  background:white; 
+  box-shadow:10px 10px 5px #888888
+}

@@ -53,18 +53,18 @@ app.post('/login', function(req, res) {
         hash = ((hash << 5) - hash) + pass.charCodeAt(i);
         hash |= 0;
     }
-    require('./app/models/Users').authenticate({name: req.body.email, hash: hash},function(err,users) {
-    if (!err) {
-        for (var i = 0; i < users.length; i++) {
-            if (req.body.email == users[i].email && hash == users[i].hash) {
-                sess.email=req.body.email;
-                 res.end('done');
+    require('./app/models/Users').authenticate(function(err,users) {
+        if (!err) {
+            for (var i = 0; i < users.length; i++) {
+                if (req.body.email == users[i].email && hash == users[i].hash) {
+                    sess.email = users[i].email;
+                    res.end('done');
+                }
             }
+            res.end('err');
+        } else {
+            res.end('err');
         }
-        res.end('err');
-    } else {
-        res.end('err');
-    }
     });
     
    

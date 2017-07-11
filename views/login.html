@@ -14,6 +14,21 @@
     <script>
         $(document).ready(function(){
             var email,pass;
+            $('.navbar-form').keypress(function(e) {
+                if (e.which == 13) {
+                    email=$("#email").val();
+                    pass=$("#password").val();
+                    $.post("/login",{email:email,pass:pass},function(data){       
+                        if(data==='done') {
+                            window.location.href="/dashboard";
+                        } else {
+                            $("#email").css("border", "solid 2px #ff5151");
+                            $("#password").css("border", "solid 2px #ff5151");
+                            $('#failed').show();
+                        }
+                    });
+                }
+            });
             $("#submit").click(function(){
                 email=$("#email").val();
                 pass=$("#password").val();
@@ -21,7 +36,9 @@
                     if(data==='done') {
                         window.location.href="/dashboard";
                     } else {
-                        window.alert("FAIL")
+                        $("#email").css("border", "solid 2px #ff5151");
+                        $("#password").css("border", "solid 2px #ff5151");
+                        $('#failed').show();
                     }
                 });
             });
@@ -29,12 +46,13 @@
     </script>
 </head>
 <body style="background-color:#333">
-    <nav style="background-color:#555; border-radius:0" class="navbar navbar-inverse">
-		<div class="container">
+    <div style="background-color:#555; border-radius:0" class="navbar navbar-inverse">
+        <div class="container">
 			<ul class="navigation-bar nav navbar-nav">
 				<li style="position:fixed;padding:0px; top:0px"><span><a style="padding-top:18px;padding-bottom:18px" href="/"><img width="48px" src="../assets/favicon.ico"/></a></span></li>
 			</ul>
             <form class="navbar-form navbar-right" role="form">
+                <div id="failed" class="form-group" style="color:#ff0000; display:none;">Please enter a valid e-mail/password.</div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
                     <input type="text" class="form-control" placeholder="email" id="email"/>
@@ -47,7 +65,7 @@
                 <input type="button" class="btn btn-default" value="Register" id="register"/>
             </form>
 		</div>
-	</nav>
+	</div>
 
     <div class="container">
         <div class="text-center main-widget">

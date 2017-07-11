@@ -1,5 +1,44 @@
-<div class="text-center main-widget">
-	<h1>Home Page</h1>
+<div class="main-widget" >
+	<div class="card-columns">
+		
+		<div class="card" style="width:20em">
+			<img class="card-img-top" src="style="width:50%"" alt="Card image cap">
+			<div class="card-block">
+				<h4 class="card-title">Card title</h4>
+				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content</p>
+				<a href="#" class="btn btn-primary">Go somewhere</a>
+			</div>
+		</div>
 
-	<p>{{ tagline }}</p>
+
+		<div class="card" style="width:49%">
+			<h1 class="card-title">Profile</h1>
+				<img style="border:1px solid #555; width:212px;" ng-if="!thisPlayer.photo" src="./../assets/images/silhouette.png">
+				<div class="">
+					<label>Name:</label>
+					<input type="text" class="form-control" value="{{user.name}}" ng-disabled="1"/>
+				</div>
+			<p>{{ user}} </p>
+		</div>
+
+		<div class="card" style="width:50%">
+			<h1>Something Else</h1>
+			<div class="r">
+				Not Much Here Yet (R)
+			</div>
+		</div>
+
+		<div class="card" style="width:50%">
+			<h1>Profile</h1>
+		</div>
+
+		<div class="card" style="width:50%">
+			<h1>Something Else</h1>
+			<div class="">
+				Not Much Here Yet (R)
+			</div>
+		</div>
+	</div>
+
+
 </div>
