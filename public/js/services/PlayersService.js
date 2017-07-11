@@ -24,6 +24,11 @@ var PlayersFactory = function ($http) {
     )
   }
 
+  factory.getActiveUser = function() {
+    data = $http.get('/api/players/getActiveUser');
+    return data;
+  }
+
   return factory;
 
 };

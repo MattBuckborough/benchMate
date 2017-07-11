@@ -25,7 +25,11 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse applica
 app.use(bodyParser.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
 
 /********AUTHENICATION*******/
-app.use(session({secret: 'MY_SECRET'}))
+app.use(session({
+    secret: 'MY_SECRET',
+    resave:true,
+    saveUninitialized: true
+}))
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 var sess;
@@ -39,7 +43,6 @@ app.get('/', function(req,res) {
 });
 
 app.post('/login', function(req, res) {
-    var testUsers = [{name:"tester", pass: -1014020185}]
     sess = req.session;
     // Authenticate
     var success = false;
@@ -50,14 +53,21 @@ app.post('/login', function(req, res) {
         hash = ((hash << 5) - hash) + pass.charCodeAt(i);
         hash |= 0;
     }
-    success = require('./app/models/Users').authenticate({name: req.body.email, hash: hash});
+    require('./app/models/Users').authenticate(function(err,users) {
+        if (!err) {
+            for (var i = 0; i < users.length; i++) {
+                if (req.body.email == users[i].email && hash == users[i].hash) {
+                    sess.email = users[i].email;
+                    res.end('done');
+                }
+            }
+            res.end('err');
+        } else {
+            res.end('err');
+        }
+    });
     
-    if (success == true) {
-        sess.email=req.body.email;
-        res.end('done');
-    } else {
-        res.end('err');
-    }
+   
 });
 
 app.get('/logout', function(req,res) {
