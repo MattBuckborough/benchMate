@@ -1,4 +1,4 @@
-var app = angular.module('sampleApp', ['ngRoute', 'MainCtrl', 'PlayersCtrl', 'PlayersService', 'GeekCtrl', 'GeekService']);
+var app = angular.module('sampleApp', ['ngRoute', 'MainCtrl', 'PlayersCtrl', 'PlayersService']);
 
 app.config(function($routeProvider, $locationProvider) {
 
@@ -19,15 +19,10 @@ app.config(function($routeProvider, $locationProvider) {
 			templateUrl: 'views/players.html',
 			controller: 'PlayersController',
 			resolve: {
-				players : function (PlayersFactory) {
-					return PlayersFactory.getPlayers();
+				user : function (PlayersFactory) {
+					return PlayersFactory.getUsers();
 				}
 			}
-		})
-
-		.when('/geeks', {
-			templateUrl: 'views/geek.html',
-			controller: 'GeekController'	
 		});
 
 	$locationProvider.html5Mode(true);

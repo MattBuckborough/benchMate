@@ -44,6 +44,7 @@ app.get('/', function(req,res) {
 
 app.post('/login', function(req, res) {
     sess = req.session;
+    req.body.email = req.body.email.toLowerCase();
     // Authenticate
     var success = false;
     var pass = req.body.pass + '' + process.env.PASS_HASH;
@@ -57,17 +58,55 @@ app.post('/login', function(req, res) {
         if (!err) {
             for (var i = 0; i < users.length; i++) {
                 if (req.body.email == users[i].email && hash == users[i].hash) {
+                    console.log("*****ATTEMPTED LOGIN*****\nemail: " + req.body.email + "\nhash: " + hash + "\nstatus: SUCCESS");
                     sess.email = users[i].email;
                     res.end('done');
+                    return;
                 }
             }
+            console.log("*****ATTEMPTED LOGIN*****\nemail: " + req.body.email + "\nhash: " + hash + "\nstatus: FAILURE");
             res.end('err');
         } else {
+            console.log("*****ATTEMPTED LOGIN*****\nemail: " + req.body.email + "\nhash: " + hash + "\nstatus: FAILURE");
             res.end('err');
         }
     });
+});
+
+app.post('/register', function(req, res) {
+    sess = req.session;
+    req.body.email = req.body.email.toLowerCase();
+    // Authenticate
+    var success = false;
+    var pass = req.body.pass + '' + process.env.PASS_HASH;
+    var hash = 0;
+    //hash function (salted with process.env.PASS_HASH)
+    for (var i = 0; i < pass.length; i++) {
+        hash = ((hash << 5) - hash) + pass.charCodeAt(i);
+        hash |= 0;
+    }
+    require('./app/models/Users').addUser(req.body.name, req.body.email, hash, function (err) {
+        if (!err) {
+            require('./app/models/Users').authenticate(function(err,users) {
+                if (!err) {
+                    for (var i = 0; i < users.length; i++) {
+                        if (req.body.email == users[i].email && hash == users[i].hash) {
+                            console.log("*****ATTEMPTED Register*****\nemail: " + req.body.email + "\nhash: " + hash + "\nstatus: SUCCESS");
+                            sess.email = users[i].email;
+                            res.end('done');
+                            return;
+                        }
+                    }
+                    console.log("*****ATTEMPTED Register*****\nemail: " + req.body.email + "\nhash: " + hash + "\nstatus: FAILURE");
+                    res.end('err');
+                } else {
+                    console.log("*****ATTEMPTED Register*****\nemail: " + req.body.email + "\nhash: " + hash + "\nstatus: FAILURE");
+                    res.end('err');
+                }
+            });
+        }
+    })
     
-   
 });
 
 app.get('/logout', function(req,res) {

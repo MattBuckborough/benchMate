@@ -4,7 +4,13 @@ var Schema = mongoose.Schema;
 // create a Schema
 var userSchema = new Schema({
 	email : {type : String, index : true},
-	hash : Number
+	name : {type : String, index : true},
+	hash : Number,
+	w : Number,
+	l : Number,
+	otl : Number,
+	gp : Number,
+	preferences : {type : Object}
 });
 
 // create a model
@@ -27,4 +33,17 @@ exports.getActiveUser = function(email, cb) {
 		if (err) return cb(err);
         cb(null,user[0]);
 	})
+}
+
+exports.getUsers = function(cb) { 
+	User.find({deleted: {$exists: false}}, function(err,users) {
+		if (err) return cb(err);
+		cb(null,users);
+	})
+}
+
+exports.addUser = function(name, email, hash, cb){
+	var newUser = new User({name: name, email: email, hash: hash, w: 0, l: 0, otl: 0, gp: 0, preferences: {language: "en-CA"}})
+	newUser.save();
+	cb(null);
 }

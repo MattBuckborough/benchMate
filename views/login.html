@@ -42,6 +42,24 @@
                     }
                 });
             });
+            $("#register").click(function(){
+                if ($("#registerPassword").val() == $("#registerVerifyPassword").val()) {
+                    email=$("#registerEmail").val();
+                    pass=$("#registerPassword").val();
+                    name=$("#registerName").val();
+                    $.post("/register",{email:email,pass:pass,name:name},function(data){       
+                        if(data==='done') {
+                            window.location.href="/dashboard";
+                        } else {
+                            $("#registerEmail").css("border", "solid 2px #ff5151");
+                            $("#registerPassword").css("border", "solid 2px #ff5151");
+                            $("#registerName").css("border", "solid 2px #ff5151");
+                        }
+                    });
+                } else {
+                    window.alert("Passwords do not match")
+                }
+            });
         });
     </script>
 </head>
@@ -62,7 +80,6 @@
                     <input type="password" class="form-control" placeholder="password" id="password"/>
                 </div>
                 <input type="button" class="btn btn-default" value="Login" id="submit"/>
-                <input type="button" class="btn btn-default" value="Register" id="register"/>
             </form>
 		</div>
 	</div>
@@ -73,6 +90,24 @@
             <p>
                 Bench Mate is a tool used by coaching staff to automatically monitor player statistics in-game in real-time for immediate review.
             </p>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+                <input type="text" class="form-control" placeholder="email" id="registerEmail"/>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+                <input type="password" class="form-control" placeholder="password" id="registerPassword"/>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+                <input type="password" class="form-control" placeholder="verify" id="registerVerifyPassword"/>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-fw fa-address-card"></i></span>
+                <input type="text" class="form-control" placeholder="Name" id="registerName"/>
+            </div>
+            <input type="button" class="btn btn-default" value="Register" id="register"/>
+            
         </div>
     </div>
 

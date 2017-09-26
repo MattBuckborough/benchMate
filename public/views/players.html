@@ -7,29 +7,21 @@
 	<div ng-show="addModal" class="modal-outer">
 		<div class="modal-inner">
 			<div class="modal-header">
-				Add Player
+				Add Game
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<b class="col-sm-2">Name:&nbsp;</b>
+					<b class="col-sm-2">Opponent&nbsp;</b>
 					<div class="col-sm-3">
-						<input type="text" class="form-control" ng-model="playerName" />
-					</div>
-					<b class="col-sm-2">Position:&nbsp;</b>
-					<div class="col-sm-3">
-						<select class="form-control" ng-model="playerPosition">
+						<select class="form-control" ng-model="oponent">
 							<option value=''></option>
-							<option value='Center'>Center</option>
-							<option value='Defence'>Defence</option>
-							<option value='Goalie'>Goalie</option>
-							<option value='Left Wing'>Left Wing</option>
-							<option value='Right Wing'>Right Wing</option>
+							<option ng-repeat="player in players" value='{{player.email}}'>{{player.email}}</option>
 						</select>
 					</div>
 				</div>
 				<br/>
 				<div class="row">
-					<b class="col-sm-2">Number:&nbsp;</b>
+					<b class="col-sm-2">Your Score:&nbsp;</b>
 					<div class="col-sm-3">
 						<input type="number" class="form-control" ng-model="playerNumber" />
 					</div>
@@ -104,40 +96,35 @@
 	<div class="table-div">
 		<table class="table table-head table-radius">
 			<tr>
-				<th class="text-cell" ng-click="sortType='name'; descending = !descending">
+				<th class="text-cell" ng-click="sortType='email'; descending = !descending">
 					Name
-					<i ng-if="sortType=='name' && descending" class="fa fa-fw fa-caret-down"></i>
-					<i ng-if="sortType=='name' && !descending" class="fa fa-fw fa-caret-up"></i>
+					<i ng-if="sortType=='email' && descending" class="fa fa-fw fa-caret-down"></i>
+					<i ng-if="sortType=='email' && !descending" class="fa fa-fw fa-caret-up"></i>
 				</th>
-				<th class="text-cell" ng-click="sortType='position'; descending = !descending">
-					Position
-					<i ng-if="sortType=='position' && descending" class="fa fa-fw fa-caret-down"></i>
-					<i ng-if="sortType=='position' && !descending" class="fa fa-fw fa-caret-up"></i>
-				</th>
-				<th class="number-cell" ng-click="sortType='number'; descending = !descending">
-					Number
-					<i ng-if="sortType=='number' && !descending" class="fa fa-fw fa-caret-down"></i>
-					<i ng-if="sortType=='number' && descending" class="fa fa-fw fa-caret-up"></i>
-				</th>
-				<th class="number-cell" ng-click="sortType='stats.g'; descending = !descending">
-					Goals
-					<i ng-if="sortType=='stats.g' && !descending" class="fa fa-fw fa-caret-down"></i>
-					<i ng-if="sortType=='stats.g' && descending" class="fa fa-fw fa-caret-up"></i>
-				</th>
-				<th class="number-cell" ng-click="sortType='stats.a'; descending = !descending">
-					Assists
-					<i ng-if="sortType=='stats.a' && !descending" class="fa fa-fw fa-caret-down"></i>
-					<i ng-if="sortType=='stats.a' && descending" class="fa fa-fw fa-caret-up"></i>
-				</th>
-				<th class="number-cell" ng-click="sortType='stats.gp'; descending = !descending">
+				<th class="number-cell" ng-click="sortType='gp'; descending = !descending">
 					Games Played
-					<i ng-if="sortType=='stats.gp' && !descending" class="fa fa-fw fa-caret-down"></i>
-					<i ng-if="sortType=='stats.gp' && descending" class="fa fa-fw fa-caret-up"></i>
+					<i ng-if="sortType=='gp' && !descending" class="fa fa-fw fa-caret-down"></i>
+					<i ng-if="sortType=='gp' && descending" class="fa fa-fw fa-caret-up"></i>
 				</th>
-				<th class="number-cell" ng-click="sortType='stats.PIMs'; descending = !descending">
-					PIM
-					<i ng-if="sortType=='stats.PIMs' && !descending" class="fa fa-fw fa-caret-down"></i>
-					<i ng-if="sortType=='stats.PIMs' && descending" class="fa fa-fw fa-caret-up"></i>
+				<th class="number-cell" ng-click="sortType='w'; descending = !descending">
+					Wins
+					<i ng-if="sortType=='w' && !descending" class="fa fa-fw fa-caret-down"></i>
+					<i ng-if="sortType=='w' && descending" class="fa fa-fw fa-caret-up"></i>
+				</th>
+				<th class="number-cell" ng-click="sortType='l'; descending = !descending">
+					Losses
+					<i ng-if="sortType=='l' && !descending" class="fa fa-fw fa-caret-down"></i>
+					<i ng-if="sortType=='l' && descending" class="fa fa-fw fa-caret-up"></i>
+				</th>
+				<th class="number-cell" ng-click="sortType='otl'; descending = !descending">
+					Overtime Losses
+					<i ng-if="sortType=='otl' && !descending" class="fa fa-fw fa-caret-down"></i>
+					<i ng-if="sortType=='otl' && descending" class="fa fa-fw fa-caret-up"></i>
+				</th>
+				<th class="number-cell" ng-click="sortType='points'; descending = !descending">
+					Points
+					<i ng-if="sortType=='points' && !descending" class="fa fa-fw fa-caret-down"></i>
+					<i ng-if="sortType=='points' && descending" class="fa fa-fw fa-caret-up"></i>
 				</th>
 			</tr>
 		</table>
@@ -148,12 +135,11 @@
 			<tbody style="height:200px !important;overflow-y:scroll" class="table-body">
 				<tr ng-repeat="player in players | orderBy: sortType:descending |filter: searchValues" ng-click=viewPlayerModalOpen(player)>
 					<td class="text-cell">{{player.name}}</td>
-					<td class="text-cell">{{player.position}}</td>
-					<td class="number-cell">{{player.number}}</td>
-					<td class="number-cell">{{player.stats.g}}</td>
-					<td class="number-cell">{{player.stats.a}}</td>
-					<td class="number-cell">{{player.stats.gp}}</td>
-					<td class="number-cell">{{player.stats.PIMs}}</td>
+					<td class="number-cell">{{player.gp}}</td>
+					<td class="number-cell">{{player.w}}</td>
+					<td class="number-cell">{{player.l}}</td>
+					<td class="number-cell">{{player.otl}}</td>
+					<td class="number-cell">{{player.points}}</td>
 				</tr>
 			</tbody>
 		</table>
