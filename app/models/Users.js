@@ -43,7 +43,16 @@ exports.getUsers = function(cb) {
 }
 
 exports.addUser = function(name, email, hash, cb){
-	var newUser = new User({name: name, email: email, hash: hash, w: 0, l: 0, otl: 0, gp: 0, preferences: {language: "en-CA"}})
-	newUser.save();
-	cb(null);
+	User.find({deleted: {$exists: false}}, function(err,users) {
+		if (err) return cb(err);
+		for (var i = 0; i < users.length; i++){
+			if (users[i].email == email) {
+				return cb(null,false)
+			}
+		}
+		var newUser = new User({name: name, email: email, hash: hash, w: 0, l: 0, otl: 0, gp: 0, preferences: {language: "en-CA"}})
+		newUser.save();
+		cb(null, true);
+	})
+	
 }

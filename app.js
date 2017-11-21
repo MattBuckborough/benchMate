@@ -85,8 +85,8 @@ app.post('/register', function(req, res) {
         hash = ((hash << 5) - hash) + pass.charCodeAt(i);
         hash |= 0;
     }
-    require('./app/models/Users').addUser(req.body.name, req.body.email, hash, function (err) {
-        if (!err) {
+    require('./app/models/Users').addUser(req.body.name, req.body.email, hash, function (err, valid) {
+        if (!err && !valid) {
             require('./app/models/Users').authenticate(function(err,users) {
                 if (!err) {
                     for (var i = 0; i < users.length; i++) {

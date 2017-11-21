@@ -29,6 +29,11 @@ module.exports = function(app) {
 		});
 	});
 
+	// Add win
+	app.post("/api/user/win/:user" , function(req,res) {
+		console.log(req.params.user)
+	})
+
 	// frontend routes =========================================================
 	// route to handle all angular requests
 	app.get('*', function(req, res) {

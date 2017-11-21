@@ -11,25 +11,40 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<b class="col-sm-2">Opponent&nbsp;</b>
+					<b class="col-sm-3">Player One&nbsp;</b>
 					<div class="col-sm-3">
-						<select class="form-control" ng-model="oponent">
+						<select class="form-control" ng-model="playerOne">
 							<option value=''></option>
-							<option ng-repeat="player in players" value='{{player.email}}'>{{player.email}}</option>
+							<option ng-repeat="player in players" value='{{player.email}}'>{{player.name}}</option>
+						</select>
+					</div>
+					<b class="col-sm-3">Player Two&nbsp;</b>
+					<div class="col-sm-3">
+						<select class="form-control" ng-model="playerTwo">
+							<option value=''></option>
+							<option ng-repeat="player in players" value='{{player.email}}'>{{player.name}}</option>
 						</select>
 					</div>
 				</div>
 				<br/>
 				<div class="row">
-					<b class="col-sm-2">Your Score:&nbsp;</b>
+					<b class="col-sm-3">Player One Score:&nbsp;</b>
 					<div class="col-sm-3">
-						<input type="number" class="form-control" ng-model="playerNumber" />
+						<input type="number" class="form-control" ng-model="playerOneScore" />
 					</div>
+					<b class="col-sm-3">Player Two Score:&nbsp;</b>
+					<div class="col-sm-3">
+						<input type="number" class="form-control" ng-model="playerTwoScore" />
+					</div>
+				</div>
+				<div class="row">
+					<b>OTL?:&nbsp;</b>
+					<input type="checkbox" ng-model="otl"/>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button ng-click="addPlayerModalSubmit()" class="btn btn-primary">Submit</button>
-				<button ng-click="addPlayerModalClose()" class="btn btn-default">Close</button>
+				<button ng-click="addGameModalSubmit()" class="btn btn-primary">Submit</button>
+				<button ng-click="addGameModalClose()" class="btn btn-default">Close</button>
 			</div>
 		</div>
 	</div>
