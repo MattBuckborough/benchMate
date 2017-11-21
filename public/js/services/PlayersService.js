@@ -17,8 +17,20 @@ var PlayersFactory = function ($http) {
   factory.addGame = function (gameStats){
     if (gameStats.playerTwoScore > gameStats.playerOneScore) {
       $http.post('/api/user/win/'+gameStats.playerTwo);
+      $http.post('/api/user/loss/'+gameStats.playerOne+"/"+gameStats.otl);
+      $http.post('/api/game/addGame/' +gameStats.playerTwo+"/"
+                                      +gameStats.playerOne+"/"
+                                      +gameStats.playerTwoScore+"/"
+                                      +gameStats.playerOneScore+"/"
+                                      +gameStats.otl);
     } else {
-      console.log("player One Won")
+      $http.post('/api/user/win/'+gameStats.playerOne);
+      $http.post('/api/user/loss/'+gameStats.playerTwo+"/"+gameStats.otl);
+      $http.post('/api/game/addGame/' +gameStats.playerOne+"/"
+                                      +gameStats.playerTwo+"/"
+                                      +gameStats.playerOneScore+"/"
+                                      +gameStats.playerTwoScore+"/"
+                                      +gameStats.otl);
     }
     return;
   }

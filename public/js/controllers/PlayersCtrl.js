@@ -35,10 +35,12 @@ angular.module('PlayersCtrl', []).controller('PlayersController',function($scope
 					if ($scope.playerOne == $scope.players[i].email){
 						$scope.players[i].gp++;
 						$scope.players[i].w++;
+						$scope.players[i].points = $scope.players[i].points + 2;
 					}
 					if ($scope.playerTwo == $scope.players[i].email){
 						$scope.players[i].gp++;
 						$scope.otl?$scope.players[i].otl++:$scope.players[i].l++;
+						if ($scope.otl) $scope.players[i].points++;
 					}
 				}
 			} else {
@@ -46,10 +48,12 @@ angular.module('PlayersCtrl', []).controller('PlayersController',function($scope
 					if ($scope.playerTwo == $scope.players[i].email){
 						$scope.players[i].gp++;
 						$scope.players[i].w++;
+						$scope.players[i].points = $scope.players[i].points + 2;
 					}
 					if ($scope.playerOne == $scope.players[i].email){
 						$scope.players[i].gp++;
 						$scope.otl?$scope.players[i].otl++:$scope.players[i].l++;
+						if ($scope.otl) $scope.players[i].points++;
 					}
 				}
 			}

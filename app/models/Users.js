@@ -56,3 +56,38 @@ exports.addUser = function(name, email, hash, cb){
 	})
 	
 }
+
+exports.addWin = function(email, cb) {
+	console.log("*****USER WON*****\n" + email);
+	User.find({'email' : email}, {}, function(err,user) {
+		User.update({_id: user[0]._id}, {
+			w: user[0].w + 1, 
+			gp: user[0].gp + 1, 
+		}, function(err, affected, resp) {
+			return cb(err);
+		})
+	})
+}
+
+exports.addLoss = function(email, otl, cb) {
+	console.log("*****USER LOST*****\n" + email + "\nOTL: " + otl);
+	if (otl == 'true' || otl != "undefined") {
+		User.find({'email' : email}, {}, function(err,user) {
+			User.update({_id: user[0]._id}, {
+				otl: user[0].otl + 1, 
+				gp: user[0].gp + 1, 
+			}, function(err, affected, resp) {
+				return cb(err);
+			})
+		})
+	} else {
+		User.find({'email' : email}, {}, function(err,user) {
+			User.update({_id: user[0]._id}, {
+				l: user[0].l + 1, 
+				gp: user[0].gp + 1, 
+			}, function(err, affected, resp) {
+				return cb(err);
+			})
+		})
+	}
+}

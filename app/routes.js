@@ -1,4 +1,5 @@
 var users = require('./models/Users');
+var games = require('./models/Games');
 var path = require('path');
 
 module.exports = function(app) {
@@ -31,7 +32,29 @@ module.exports = function(app) {
 
 	// Add win
 	app.post("/api/user/win/:user" , function(req,res) {
-		console.log(req.params.user)
+		users.addWin(req.params.user, function(err, data) {
+			if (err) {
+				return err;
+			} 
+		})
+	})
+
+	// Add loss
+	app.post("/api/user/loss/:user/:otl" , function(req,res) {
+		users.addLoss(req.params.user, req.params.otl, function(err, data) {
+			if (err) {
+				return err;
+			} 
+		})
+	})
+
+	// Add loss
+	app.post("/api/game/addGame/:winner/:loser/:w/:l/:otl" , function(req,res) {
+		games.addGame(req.session.email, req.params.winner, req.params.loser, req.params.w, req.params.l, req.params.otl, function(err, data) {
+			if (err) {
+				return err;
+			} 
+		})
 	})
 
 	// frontend routes =========================================================
