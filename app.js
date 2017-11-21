@@ -128,5 +128,5 @@ require('./app/routes')(app); // pass our application into our routes
 
 // start app ===============================================
 app.listen(port);	
-console.log('Listening to port ' + port); 			// shoutout to the user
+console.log('*****Listening to port ' + port + '*****'); 			// shoutout to the user
 exports = module.exports = app; 						// expose app

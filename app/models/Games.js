@@ -18,6 +18,13 @@ Game.create(function (err){
 	if (err) throw err;
 })
 
+exports.getGames = function(cb) { 
+	Game.find({}, function(err,games) {
+		if (err) return cb(err);
+		cb(null,games);
+	})
+}
+
 exports.addGame = function(createdBy, winner, loser, w, l, otl, cb){
     if (otl == "undefined" || otl == "false") {
         otl = false;

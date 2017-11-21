@@ -14,6 +14,11 @@ var PlayersFactory = function ($http) {
     return data;
   }
 
+  factory.getGames = function() {
+    data = $http.get('/api/games/getGames');
+    return data;
+  }
+
   factory.addGame = function (gameStats){
     if (gameStats.playerTwoScore > gameStats.playerOneScore) {
       $http.post('/api/user/win/'+gameStats.playerTwo);

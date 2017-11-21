@@ -19,8 +19,24 @@ app.config(function($routeProvider, $locationProvider) {
 			templateUrl: 'views/players.html',
 			controller: 'PlayersController',
 			resolve: {
-				user : function (PlayersFactory) {
+				users : function (PlayersFactory) {
 					return PlayersFactory.getUsers();
+				},
+				game : function (PlayersFactory) {
+					return PlayersFactory.getGames();
+				}
+			}
+		})
+
+		.when('/games', {
+			templateUrl: 'views/games.html',
+			controller: 'PlayersController',
+			resolve: {
+				users : function (PlayersFactory) {
+					return PlayersFactory.getUsers();
+				},
+				game : function (PlayersFactory) {
+					return PlayersFactory.getGames();
 				}
 			}
 		});

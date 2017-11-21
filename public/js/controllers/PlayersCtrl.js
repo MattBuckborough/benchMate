@@ -2,15 +2,18 @@ angular.module('PlayersCtrl', []).controller('PlayersController',function($scope
 
 	$scope.tagline = 'Players';
 	$scope.sortType = "points";
+	$scope.gameSortType = "ts";
 	$scope.addModal = false;
 	$scope.playerModal = false;
 	$scope.searchValues = '';
 	$scope.descending = true;	
 	$scope.players = [];
-	if ($route.current) $scope.players = $route.current.locals.user.data;
+	if ($route.current) $scope.players = $route.current.locals.users.data;
 	for(var i = 0; i < $scope.players.length; i++) {
 		$scope.players[i].points = ($scope.players[i].w * 2) + $scope.players[i].otl;
 	}
+
+	if ($route.current) $scope.games = $route.current.locals.game.data;
 
 	$scope.playerName = ''; 
 	$scope.playerPosition = '';

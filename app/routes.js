@@ -18,6 +18,17 @@ module.exports = function(app) {
 			}
 		});
 	});
+
+	// Get all games
+	app.get("/api/games/getGames", function(req,res) {
+		games.getGames(function(err, data) {
+			if (err) {
+				return err;
+			} else {
+				res.send(data);
+			}
+		});
+	});
 	
 	// Get current active user information
 	app.get("/api/user/getActiveUser", function(req,res) {

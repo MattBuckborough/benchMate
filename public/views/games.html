@@ -1,0 +1,105 @@
+<div class="text-center main-widget">
+	<h1>
+		Games
+	</h1>
+	<br/>
+
+	<div ng-show="addModal" class="modal-outer">
+		<div class="modal-inner">
+			<div class="modal-header">
+				Add Game
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<b class="col-sm-3">Player One&nbsp;</b>
+					<div class="col-sm-3">
+						<select class="form-control" ng-model="playerOne">
+							<option value=''></option>
+							<option ng-repeat="player in players" value='{{player.email}}'>{{player.name}}</option>
+						</select>
+					</div>
+					<b class="col-sm-3">Player Two&nbsp;</b>
+					<div class="col-sm-3">
+						<select class="form-control" ng-model="playerTwo">
+							<option value=''></option>
+							<option ng-repeat="player in players" value='{{player.email}}'>{{player.name}}</option>
+						</select>
+					</div>
+				</div>
+				<br/>
+				<div class="row">
+					<b class="col-sm-3">Player One Score:&nbsp;</b>
+					<div class="col-sm-3">
+						<input type="number" class="form-control" ng-model="playerOneScore" />
+					</div>
+					<b class="col-sm-3">Player Two Score:&nbsp;</b>
+					<div class="col-sm-3">
+						<input type="number" class="form-control" ng-model="playerTwoScore" />
+					</div>
+				</div>
+				<div class="row">
+					<b>OTL?:&nbsp;</b>
+					<input type="checkbox" ng-model="otl"/>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button ng-click="addGameModalSubmit()" class="btn btn-primary">Submit</button>
+				<button ng-click="addGameModalClose()" class="btn btn-default">Close</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="table-div">
+		<table class="table table-head table-radius">
+			<tr>
+				<th class="text-cell" ng-click="gameSortType='winner'; descending = !descending">
+					Winner
+					<i ng-if="gameSortType=='winner' && descending" class="fa fa-fw fa-caret-down"></i>
+					<i ng-if="gameSortType=='winner' && !descending" class="fa fa-fw fa-caret-up"></i>
+				</th>
+				<th class="number-cell" ng-click="gameSortType='w'; descending = !descending">
+					Score
+					<i ng-if="gameSortType=='w' && !descending" class="fa fa-fw fa-caret-down"></i>
+					<i ng-if="gameSortType=='w' && descending" class="fa fa-fw fa-caret-up"></i>
+				</th>
+				<th class="number-cell" ng-click="gameSortType='loser'; descending = !descending">
+					Loser
+					<i ng-if="gameSortType=='loser' && !descending" class="fa fa-fw fa-caret-down"></i>
+					<i ng-if="gameSortType=='loser' && descending" class="fa fa-fw fa-caret-up"></i>
+				</th>
+				<th class="number-cell" ng-click="gameSortType='l'; descending = !descending">
+					Score
+					<i ng-if="gameSortType=='l' && !descending" class="fa fa-fw fa-caret-down"></i>
+					<i ng-if="gameSortType=='l' && descending" class="fa fa-fw fa-caret-up"></i>
+				</th>
+				<th class="number-cell" ng-click="gameSortType='otl'; descending = !descending">
+					Overtime Loss
+					<i ng-if="gameSortType=='otl' && !descending" class="fa fa-fw fa-caret-down"></i>
+					<i ng-if="gameSortType=='otl' && descending" class="fa fa-fw fa-caret-up"></i>
+				</th>
+				<th class="number-cell" ng-click="gameSortType='ts'; descending = !descending">
+					Date
+					<i ng-if="gameSortType=='ts' && !descending" class="fa fa-fw fa-caret-down"></i>
+					<i ng-if="gameSortType=='ts' && descending" class="fa fa-fw fa-caret-up"></i>
+				</th>
+			</tr>
+		</table>
+	</div>
+
+	<div class="table-div-scrollable">
+		<table class="table table-striped table-scrollable table-link">
+			<tbody style="height:200px !important;overflow-y:scroll" class="table-body">
+				<tr ng-repeat="game in games | orderBy: gameSortType:descending |filter: searchValues" ng-click=viewPlayerModalOpen(player)>
+					<td class="text-cell">{{game.winner}}</td>
+					<td class="number-cell">{{game.w}}</td>
+					<td class="number-cell">{{game.loser}}</td>
+					<td class="number-cell">{{game.l}}</td>
+					<td class="number-cell">{{game.otl}}</td>
+					<td class="number-cell">{{game.ts | date : 'yyyy-MM-dd'}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br/>
+	<button ng-click="addModal=!addModal" class="pull-right btn btn-default" style="cursor:pointer"><i class="green fa fa-2x fa-fw fa-plus"></i></button>
+</div>
