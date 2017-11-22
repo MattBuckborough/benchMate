@@ -9,10 +9,10 @@ html {
 
 .main-widget {
   background-color:#ccc;
-  height:660px;
+  height:560px;
   padding:20px;
   border-radius:0 !important;
-  overflow-y:auto;
+  overflow-y:scroll;
 }
 
 .table-head {
