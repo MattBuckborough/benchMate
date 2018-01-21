@@ -42,6 +42,25 @@
                     }
                 });
             });
+            $("#register").click(function(){
+                if ($("#registerPassword").val() == $("#registerVerifyPassword").val()) {
+                    email=$("#registerEmail").val();
+                    pass=$("#registerPassword").val();
+                    name=$("#registerName").val();
+                    $.post("/register",{email:email,pass:pass,name:name},function(data){       
+                        if(data==='done') {
+                            window.location.href="/dashboard";
+                        } else {
+                            $("#registerEmail").css("border", "solid 2px #ff5151");
+                            window.alert("This email is already registerd.\nIf you forgot your password contact your system admisitrator.")
+                        }
+                    });
+                } else {
+                    window.alert("Passwords do not match")
+                    $("#registerPassword").css("border", "solid 2px #ff5151");
+                    $("#registerVerifyPassword").css("border", "solid 2px #ff5151");
+                }
+            });
         });
     </script>
 </head>
@@ -49,7 +68,7 @@
     <div style="background-color:#555; border-radius:0" class="navbar navbar-inverse">
         <div class="container">
 			<ul class="navigation-bar nav navbar-nav">
-				<li style="position:fixed;padding:0px; top:0px"><span><a style="padding-top:18px;padding-bottom:18px" href="/"><img width="48px" src="../assets/favicon.ico"/></a></span></li>
+				<li style="padding-bottom:1px"><span><a style="padding-top:18px;padding-bottom:18px" href="/"><img width="48px" src="../assets/favicon.ico"/></a></span></li>
 			</ul>
             <form class="navbar-form navbar-right" role="form">
                 <div id="failed" class="form-group" style="color:#ff0000; display:none;">Please enter a valid e-mail/password.</div>
@@ -62,7 +81,6 @@
                     <input type="password" class="form-control" placeholder="password" id="password"/>
                 </div>
                 <input type="button" class="btn btn-default" value="Login" id="submit"/>
-                <input type="button" class="btn btn-default" value="Register" id="register"/>
             </form>
 		</div>
 	</div>
@@ -70,17 +88,33 @@
     <div class="container">
         <div class="text-center main-widget">
             <h1>Bench Mate</h1>
-            <p>
-                Bench Mate is a tool used by coaching staff to automatically monitor player statistics in-game in real-time for immediate review.
-            </p>
+            <h1 style="text-align:left">Sign-Up</h1>
+            <div class="input-group" style="margin-bottom:5px">
+                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+                <input type="text" style="width:30%" class="form-control" placeholder="email" id="registerEmail"/>
+            </div>
+            <div class="input-group" style="margin-bottom:5px">
+                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+                <input type="password" style="width:30%" class="form-control" placeholder="password" id="registerPassword"/>
+            </div>
+            <div class="input-group" style="margin-bottom:5px">
+                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+                <input type="password" style="width:30%" class="form-control" placeholder="verify" id="registerVerifyPassword"/>
+            </div>
+            <div class="input-group" style="margin-bottom:5px">
+                <span class="input-group-addon"><i class="fa fa-fw fa-address-card"></i></span>
+                <input type="text" style="width:30%" class="form-control" placeholder="Name" id="registerName"/>
+            </div>
+            <input type="button" class="btn btn-default pull-left" value="Register" id="register"/>
+            
         </div>
     </div>
 
 
 	</br>
-	<div class="" style="position:fixed; width:100%; bottom:0; left:0; background-color:#999; height:18px;"> 
+	<div class="" style="position:fixed; width:100%; bottom:0; left:0; background-color:#999; height:4%;"> 
 		<div class="container">
-			<p style="text-align:center">Copyright © 2017 Matt Buckborough v0.0.1</p>
+			<p style="text-align:center">Copyright © 2017 <a href="https://github.com/MattBuckborough">Matt Buckborough</a> v0.5.1</p>
 		</div>
 	</div>
 

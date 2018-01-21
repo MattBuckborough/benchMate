@@ -2,31 +2,46 @@ var PlayersFactory = function ($http) {
 
   var factory = {};
 
-  // this gets all the players
-  factory.getPlayers = function () {
-    data = $http.get('/api/players/getPlayers');
+  // this gets all the users
+  factory.getUsers = function () {
+    data = $http.get('/api/user/getUsers');
     return data;
   };
 
-  // this call creates a new player
-  factory.addPlayer = function (playerData) {
-    return $http.put('/api/players/addPlayer', playerData).then(
-      function() {},
-      function() {}
-    );
+  factory.deleteUser = function(userid) {
+    $http.post('/api/user/delete/'+userid);
   };
 
-  // this call deletes a player by id
-  factory.deletePlayer = function (playerId) {
-    return $http.post('/api/players/deletePlayer/' + playerId).then(
-      function() { },
-      function() { }
-    )
+  //this gets the current user
+  factory.getActiveUser = function() {
+    data = $http.get('/api/user/getActiveUser');
+    return data;
   }
 
-  factory.getActiveUser = function() {
-    data = $http.get('/api/players/getActiveUser');
+  factory.getGames = function() {
+    data = $http.get('/api/games/getGames');
     return data;
+  }
+
+  factory.addGame = function (gameStats){
+    if (gameStats.playerTwoScore > gameStats.playerOneScore) {
+      $http.post('/api/user/win/'+gameStats.playerTwo);
+      $http.post('/api/user/loss/'+gameStats.playerOne+"/"+gameStats.otl);
+      $http.post('/api/game/addGame/' +gameStats.playerTwo+"/"
+                                      +gameStats.playerOne+"/"
+                                      +gameStats.playerTwoScore+"/"
+                                      +gameStats.playerOneScore+"/"
+                                      +gameStats.otl);
+    } else {
+      $http.post('/api/user/win/'+gameStats.playerOne);
+      $http.post('/api/user/loss/'+gameStats.playerTwo+"/"+gameStats.otl);
+      $http.post('/api/game/addGame/' +gameStats.playerOne+"/"
+                                      +gameStats.playerTwo+"/"
+                                      +gameStats.playerOneScore+"/"
+                                      +gameStats.playerTwoScore+"/"
+                                      +gameStats.otl);
+    }
+    return;
   }
 
   return factory;

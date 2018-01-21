@@ -1,5 +1,5 @@
-var players = require('./models/Players');
 var users = require('./models/Users');
+var games = require('./models/Games');
 var path = require('path');
 
 module.exports = function(app) {
@@ -8,9 +8,20 @@ module.exports = function(app) {
 	// handle things like api calls
 	// authentication routes
 
-	// Get all players
-	app.get("/api/players/getPlayers", function(req,res) {
-		players.getPlayers(function(err, data) {
+	// Get all users
+	app.get("/api/user/getUsers", function(req,res) {
+		users.getUsers(function(err, data) {
+			if (err) {
+				return err;
+			} else {
+				res.send(data);
+			}
+		});
+	});
+
+	// Get all games
+	app.get("/api/games/getGames", function(req,res) {
+		games.getGames(function(err, data) {
 			if (err) {
 				return err;
 			} else {
@@ -20,7 +31,7 @@ module.exports = function(app) {
 	});
 	
 	// Get current active user information
-	app.get("/api/players/getActiveUser", function(req,res) {
+	app.get("/api/user/getActiveUser", function(req,res) {
 		users.getActiveUser(req.session.email, function(err, data) {
 			if (err) {
 				return err;
@@ -30,27 +41,41 @@ module.exports = function(app) {
 		});
 	});
 
-	// Add a player
-	app.put("/api/players/addPlayer/", function(req,res) {
-		players.addPlayer(req.body.name, req.body.position, req.body.num, function(err, data) {
+	// Delete user
+	app.post("/api/user/delete/:user" , function(req,res) {
+		users.delete(req.params.user, function(err, data) {
 			if (err) {
 				return err;
-			} else {
-				
-			}
-		});
-	});
+			} 
+		})
+	})
 
-	// Delete a player
-	app.post("/api/players/deletePlayer/:id" , function(req,res) {
-		players.deletePlayer(req.params.id, function(err, data) {
+	// Add win
+	app.post("/api/user/win/:user" , function(req,res) {
+		users.addWin(req.params.user, function(err, data) {
 			if (err) {
 				return err;
-			} else {
-				
-			}
-		});
-	});
+			} 
+		})
+	})
+
+	// Add loss
+	app.post("/api/user/loss/:user/:otl" , function(req,res) {
+		users.addLoss(req.params.user, req.params.otl, function(err, data) {
+			if (err) {
+				return err;
+			} 
+		})
+	})
+
+	// Add loss
+	app.post("/api/game/addGame/:winner/:loser/:w/:l/:otl" , function(req,res) {
+		games.addGame(req.session.email, req.params.winner, req.params.loser, req.params.w, req.params.l, req.params.otl, function(err, data) {
+			if (err) {
+				return err;
+			} 
+		})
+	})
 
 	// frontend routes =========================================================
 	// route to handle all angular requests
