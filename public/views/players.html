@@ -51,7 +51,7 @@
 	<div ng-show="playerModal" class="modal-outer">
 		<div class="modal-inner">
 			<div class="modal-header">
-				{{thisPlayer.name}}&nbsp;|&nbsp;#&nbsp;{{thisPlayer.number}}
+				{{thisPlayer.name}}&nbsp;|&nbsp;&nbsp;{{thisPlayer.w}}-{{thisPlayer.l}}-{{thisPlayer.otl}}
 			</div>
 			<div class="modal-body">
 				<div class="row">
@@ -63,28 +63,46 @@
 					<div class="col-sm-7">
 						<div class="row">
 							<div class="col-sm-3">
-								<label style="text-align:right">Name:<label>
+								<label style="text-align:right">Wins:<label>
 							</div>
 							<div class="col-sm-9">
-								<input type="text" readonly class="form-control" value="{{thisPlayer.name}}">
+								<input type="text" readonly class="form-control" value="{{thisPlayer.w}}">
 							</div>
 						</div>
 						<br/>
 						<div class="row">
 							<div class="col-sm-3">
-								<label style="text-align:right">Position:<label>
+								<label style="text-align:right">Losses:<label>
 							</div>
 							<div class="col-sm-9">
-								<input type="text" readonly class="form-control" value="{{thisPlayer.position}}">
+								<input type="text" readonly class="form-control" value="{{thisPlayer.l}}">
 							</div>
 						</div>
 						<br/>
 						<div class="row">
 							<div class="col-sm-3">
-								<label style="text-align:right">Number:<label>
+								<label style="text-align:right">Overtime Losses:<label>
 							</div>
 							<div class="col-sm-9">
-								<input type="text" readonly class="form-control" value="{{thisPlayer.number}}">
+								<input type="text" readonly class="form-control" value="{{thisPlayer.otl}}">
+							</div>
+						</div>
+						<br/>
+						<div class="row">
+							<div class="col-sm-3">
+								<label style="text-align:right">Points:<label>
+							</div>
+							<div class="col-sm-9">
+								<input type="text" readonly class="form-control" value="{{thisPlayer.points}}">
+							</div>
+						</div>
+						<br/>
+						<div class="row">
+							<div class="col-sm-3">
+								<label style="text-align:right">Games Played:<label>
+							</div>
+							<div class="col-sm-9">
+								<input type="text" readonly class="form-control" value="{{thisPlayer.gp}}">
 							</div>
 						</div>
 
@@ -93,7 +111,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button ng-click="viewPlayerModalDelete(thisPlayer)" class="btn btn-default">Delete</button>
+				<button ng-if="user.isAdmin && user.isAdmin == true" ng-click="viewPlayerModalDelete(thisPlayer)" class="btn btn-default">Delete</button>
 				<button ng-click="viewPlayerModalClose()" class="btn btn-default">Close</button>
 			</div>
 		</div>

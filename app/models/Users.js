@@ -10,6 +10,7 @@ var userSchema = new Schema({
 	l : Number,
 	otl : Number,
 	gp : Number,
+	deleted : Boolean,
 	preferences : {type : Object}
 });
 
@@ -55,6 +56,15 @@ exports.addUser = function(name, email, hash, cb){
 		cb(null, true);
 	})
 	
+}
+
+exports.delete = function(user,cb) {
+	console.log("*****DELETING " + user + "*****");
+	User.update({_id: user}, {
+		deleted: true
+	}, function (err, affected, resp) {
+		return cb(err)
+	});
 }
 
 exports.addWin = function(email, cb) {

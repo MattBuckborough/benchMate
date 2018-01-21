@@ -19,6 +19,9 @@ app.config(function($routeProvider, $locationProvider) {
 			templateUrl: 'views/players.html',
 			controller: 'PlayersController',
 			resolve: {
+				user : function (PlayersFactory) {
+					return PlayersFactory.getActiveUser();
+				},
 				users : function (PlayersFactory) {
 					return PlayersFactory.getUsers();
 				},
@@ -32,6 +35,9 @@ app.config(function($routeProvider, $locationProvider) {
 			templateUrl: 'views/games.html',
 			controller: 'PlayersController',
 			resolve: {
+				user : function (PlayersFactory) {
+					return PlayersFactory.getActiveUser();
+				},
 				users : function (PlayersFactory) {
 					return PlayersFactory.getUsers();
 				},

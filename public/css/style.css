@@ -102,7 +102,9 @@ table th {
 }
 
 .modal-body {
-  
+  height:70%;
+  overflow: auto;
+  padding-bottom:2%;
 }
 
 .table-link tr:hover {

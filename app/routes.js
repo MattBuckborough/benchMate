@@ -41,6 +41,15 @@ module.exports = function(app) {
 		});
 	});
 
+	// Delete user
+	app.post("/api/user/delete/:user" , function(req,res) {
+		users.delete(req.params.user, function(err, data) {
+			if (err) {
+				return err;
+			} 
+		})
+	})
+
 	// Add win
 	app.post("/api/user/win/:user" , function(req,res) {
 		users.addWin(req.params.user, function(err, data) {

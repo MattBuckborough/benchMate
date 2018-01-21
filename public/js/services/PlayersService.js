@@ -8,6 +8,10 @@ var PlayersFactory = function ($http) {
     return data;
   };
 
+  factory.deleteUser = function(userid) {
+    $http.post('/api/user/delete/'+userid);
+  };
+
   //this gets the current user
   factory.getActiveUser = function() {
     data = $http.get('/api/user/getActiveUser');
