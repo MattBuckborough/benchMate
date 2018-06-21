@@ -2,17 +2,27 @@
 ### <p>Last Updated: Jun 21 2017</p> Email:  mattbuckborough@gmail.com
 ## General Usage Notes
 This is a web application written using the [MEAN](https://en.wikipedia.org/wiki/MEAN_(software_bundle)) stack. 
+Manages a road hockey league.
+## League Rules 
+• Games are 20 minutes long.
+  • If tied after 20 minutes, there is a sudden death period with no time limit.
+• There are no teams
+  • When two players are scheduled to play, they are the captains, and do a ‘schoolyard
+pick’ of the other players present.
+  • Coin flip for home ‘ice’ (first pick)
+  • The win or loss goes only to the captains of each team.
+• If there are not enough goalies, players must hit the post on the empty net to score a goal.
+• The Player with the highest point value at the end of the season wins
+  • Win = 2 points
+  • Overtime Loss = 1 point 
 ## Setup
 ### Requirements
 * [Raspberry Pi 2](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
-* [MFRC 522 RFID Reader](https://www.newegg.ca/Product/Product.aspx?Item=9SIA8Y63G23487)
-* MFRC 522 RFID Tags x N
-* Jumper Cables
-* USB Raspberry Pi Webcam
 * Have [Raspian](https://www.raspberrypi.org/downloads/raspbian/) OS Running on Pi
-* Have Mongo DB and Node.js installed
+* Have Mongo DB and Node.js installed (NOTE: Pi is ARM Arch)
   * [Node.js Install](https://nodejs.org/en/)
   * [Mongo DB Install](https://docs.mongodb.com/manual/administration/install-on-linux/)
+  
 ### Install
 ```
 git clone https://github.com/MattBuckborough/benchMate.git
