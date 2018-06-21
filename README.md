@@ -1,20 +1,20 @@
 # benchMate V0.0.1
 ### <p>Last Updated: Jun 21 2017</p> Email:  mattbuckborough@gmail.com
 ## General Usage Notes
-This is a web application written using the [MEAN](https://en.wikipedia.org/wiki/MEAN_(software_bundle)) stack. 
-Manages a road hockey league.
+This is a web application written using the [MEAN](https://en.wikipedia.org/wiki/MEAN_(software_bundle)) stack, 
+that manages a road hockey league.
 ## League Rules 
-• Games are 20 minutes long.
-  • If tied after 20 minutes, there is a sudden death period with no time limit.
-• There are no teams
-  • When two players are scheduled to play, they are the captains, and do a ‘schoolyard
+- Games are 20 minutes long.
+  - If tied after 20 minutes, there is a sudden death period with no time limit.
+- There are no teams
+  - When two players are scheduled to play, they are the captains, and do a ‘schoolyard
 pick’ of the other players present.
-  • Coin flip for home ‘ice’ (first pick)
-  • The win or loss goes only to the captains of each team.
-• If there are not enough goalies, players must hit the post on the empty net to score a goal.
-• The Player with the highest point value at the end of the season wins
-  • Win = 2 points
-  • Overtime Loss = 1 point 
+  - Coin flip for home ‘ice’ (first pick)
+  - The win or loss goes only to the captains of each team.
+- If there are not enough goalies, players must hit the post on the empty net to score a goal.
+- The Player with the highest point value at the end of the season wins
+  - Win = 2 points
+  - Overtime Loss = 1 point 
 ## Setup
 ### Requirements
 * [Raspberry Pi 2](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
