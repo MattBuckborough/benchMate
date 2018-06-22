@@ -2,19 +2,25 @@
 	<div class="card-columns">
 
 		<div class="card" style="width:49%; padding:3px;">
-			<h1 class="card-title">Profile</h1>
-				<div class="">
-					<label>Record:</label>
-					<input type="text" class="form-control" value="{{user.w}}-{{user.l}}-{{user.otl}}" ng-disabled="1"/>
+			<div class="row">
+				<div class="col-sm-6">
+
 				</div>
-				<div class="">
-					<label>Email:</label>
-					<input type="text" class="form-control" value="{{user.email}}" ng-disabled="1"/>
+				<div class="col-sm-6">
+					<div class="">
+						<label>Record:</label>
+						<input type="text" class="form-control" value="{{user.w}}-{{user.l}}-{{user.otl}}" ng-disabled="1"/>
+					</div>
+					<div class="">
+						<label>Email:</label>
+						<input type="text" class="form-control" value="{{user.email}}" ng-disabled="1"/>
+					</div>
+					<div class="">
+						<label>Name:</label>
+						<input type="text" class="form-control" value="{{user.name}}" ng-disabled="1"/>
+					</div>
 				</div>
-				<div class="">
-					<label>Name:</label>
-					<input type="text" class="form-control" value="{{user.name}}" ng-disabled="1"/>
-				</div>
+			</div>
 		</div>
 	</div>
 

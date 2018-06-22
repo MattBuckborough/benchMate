@@ -1,8 +1,3 @@
-if (!process.env.PASS_HASH) {
-    console.log("*** PASS_HASH Environment variable not set.")
-    return;
-}
-
 // modules =================================================
 var express         = require('express');
 var session         = require('express-session'); 
@@ -10,6 +5,8 @@ var app             = express();
 var mongoose        = require('mongoose');
 var bodyParser      = require('body-parser');
 var methodOverride  = require('method-override');
+var bcrypt          = require('bcrypt');
+
 
 // configuration ===========================================
 	
@@ -47,27 +44,22 @@ app.post('/login', function(req, res) {
     req.body.email = req.body.email.toLowerCase();
     // Authenticate
     var success = false;
-    var pass = req.body.pass + '' + process.env.PASS_HASH;
-    var hash = 0;
-    //hash function (salted with process.env.PASS_HASH)
-    for (var i = 0; i < pass.length; i++) {
-        hash = ((hash << 5) - hash) + pass.charCodeAt(i);
-        hash |= 0;
-    }
+    var pass = req.body.pass;
+
     require('./app/models/Users').authenticate(function(err,users) {
         if (!err) {
             for (var i = 0; i < users.length; i++) {
-                if (req.body.email == users[i].email && hash == users[i].hash) {
-                    console.log("*****ATTEMPTED LOGIN*****\nemail: " + req.body.email + "\nhash: " + hash + "\nstatus: SUCCESS");
+                if (req.body.email == users[i].email && bcrypt.compareSync(pass, users[i].hash)) {
+                    console.log("*****ATTEMPTED LOGIN*****\nemail: " + req.body.email + "\nhash: " + users[i].hash + "\nstatus: SUCCESS");
                     sess.email = users[i].email;
                     res.end('done');
                     return;
-                }
+                } 
             }
-            console.log("*****ATTEMPTED LOGIN*****\nemail: " + req.body.email + "\nhash: " + hash + "\nstatus: FAILURE");
+            console.log("*****ATTEMPTED LOGIN*****\nemail: " + req.body.email + "\nstatus: FAILURE");
             res.end('err');
         } else {
-            console.log("*****ATTEMPTED LOGIN*****\nemail: " + req.body.email + "\nhash: " + hash + "\nstatus: FAILURE");
+            console.log("*****ATTEMPTED LOGIN*****\nemail: " + req.body.email + "\nstatus: FAILURE");
             res.end('err');
         }
     });
@@ -78,19 +70,15 @@ app.post('/register', function(req, res) {
     req.body.email = req.body.email.toLowerCase();
     // Authenticate
     var success = false;
-    var pass = req.body.pass + '' + process.env.PASS_HASH;
-    var hash = 0;
-    //hash function (salted with process.env.PASS_HASH)
-    for (var i = 0; i < pass.length; i++) {
-        hash = ((hash << 5) - hash) + pass.charCodeAt(i);
-        hash |= 0;
-    }
+    var pass = req.body.pass;
+    let hash = bcrypt.hashSync(pass, 10);
+
     require('./app/models/Users').addUser(req.body.name, req.body.email, hash, function (err, valid) {
         if (!err && !valid) {
             require('./app/models/Users').authenticate(function(err,users) {
                 if (!err) {
                     for (var i = 0; i < users.length; i++) {
-                        if (req.body.email == users[i].email && hash == users[i].hash) {
+                        if (req.body.email == users[i].email && bcrypt.compareSync(pass, users[i].hash)) {
                             console.log("*****ATTEMPTED Register*****\nemail: " + req.body.email + "\nhash: " + hash + "\nstatus: SUCCESS");
                             sess.email = users[i].email;
                             res.end('done');
