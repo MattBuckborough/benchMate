@@ -56,10 +56,10 @@ app.post('/login', function(req, res) {
                     return;
                 } 
             }
-            console.log("*****ATTEMPTED LOGIN*****\nemail: " + req.body.email + "\nhash: " + users[i].hash + "\nstatus: FAILURE");
+            console.log("*****ATTEMPTED LOGIN*****\nemail: " + req.body.email + "\nstatus: FAILURE");
             res.end('err');
         } else {
-            console.log("*****ATTEMPTED LOGIN*****\nemail: " + req.body.email + "\nhash: " + users[i].hash + "\nstatus: FAILURE");
+            console.log("*****ATTEMPTED LOGIN*****\nemail: " + req.body.email + "\nstatus: FAILURE");
             res.end('err');
         }
     });
