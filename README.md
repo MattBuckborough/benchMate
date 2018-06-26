@@ -1,5 +1,5 @@
-# benchMate V0.0.1
-### <p>Last Updated: Jun 21 2017</p> Email:  mattbuckborough@gmail.com
+# benchMate V0.5.1
+### <p>Last Updated: Jun 21 2018</p> Email:  mattbuckborough@gmail.com
 ## General Usage Notes
 This is a web application written using the [MEAN](https://en.wikipedia.org/wiki/MEAN_(software_bundle)) stack, 
 that manages a road hockey league.
